@@ -30,6 +30,7 @@ LCH.Orphic.constants = {
   heavy_shock_id = 222071,
 
   fate_sealer_id = 214311, -- Ball summon
+  kiteId = 213900, -- kite
 }
 
 -- TODO: Teach Kabs For loops
@@ -133,7 +134,12 @@ function LCH.Orphic.ColorChange(result, targetType, targetUnitId, hitValue)
     CombatAlerts.CastAlertsStart(LCH.Orphic.constants.color_change_id, "Color Change", hitValue - hitOffset, 12000, nil, nil)
   end
 end
-
+function LCH.Orphic.KiteHappen(result, targetType, targetUnitId, hitValue)
+  if result == ACTION_RESULT_BEGIN then
+    LCH.Alert("", "KITE NOW", 0x96DED1FF, LCH.Orphic.constants.kiteId, SOUNDS.BATTLEGROUND_CAPTURE_FLAG_TAKEN_OWN_TEAM, 4000)
+    CombatAlerts.CastAlertsStart(LCH.Orphic.constants.kiteId, "KITE", hitValue, 7000, nil, nil)
+  end
+end
 function LCH.Orphic.ShieldThrow(result, targetType, targetUnitId, hitValue)
   -- Xoryn Jump Mechanic
   if result == ACTION_RESULT_BEGIN and hitValue > 500 then
